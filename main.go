@@ -15,7 +15,7 @@ func main() {
 			"message": "pong",
 		})
 	})
-	r.Run(":" + port) // listen and serve on port
+	r.Run(port) // listen and serve on port
 }
 
 func GetPort() string {
