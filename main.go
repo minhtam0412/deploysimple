@@ -1,23 +1,21 @@
 package main
 
 import (
-	"net/http"
-	"os"
+	"github.com/gin-gonic/gin"
 	"log"
-	"fmt"
+	"os"
 )
 
 func main() {
 	port := GetPort()
 	log.Println("[-] Listening on...", port)
-	http.HandleFunc("/", func (res http.ResponseWriter, req *http.Request) {
-		fmt.Fprintln(res, "hello, world")
+	r := gin.Default()
+	r.GET("/ping", func(c *gin.Context) {
+		c.JSON(200, gin.H{
+			"message": "pong",
+		})
 	})
-
-	err := http.ListenAndServe(":"+os.Getenv("PORT"), nil)
-	if err != nil {
-		panic(err)
-	}
+	r.Run(":" + port) // listen and serve on port
 }
 
 func GetPort() string {
