@@ -7,6 +7,9 @@ import (
 )
 
 func main() {
+
+	DB_URL := os.Getenv("CLEARDB_DATABASE_URL");
+	log.Println(DB_URL)
 	port := GetPort()
 	log.Println("[-] Listening on...", port)
 	r := gin.Default()
