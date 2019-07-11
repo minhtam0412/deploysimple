@@ -5,8 +5,8 @@ import (
 	"deploysimple/dto"
 )
 
-func GetAllUser() (lstUser []dto.NewUser, err error) {
-	cmd := "select ID, UserName, FullName, CreatedUser, BirthDay, CreatedAt, UpdatedAt, UpdatedUser FROM user"
+func GetAllUser() (lstUser []dto.User, err error) {
+	cmd := "SELECT ID, UserName,FullName,BirthDay, CreatedUser,CreatedAt,UpdatedUser,UpdatedAt FROM USER"
 	driver.GetConn().Select(&lstUser, cmd)
 	if err != nil {
 		return nil, err

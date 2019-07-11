@@ -3,11 +3,13 @@ package user
 import (
 	"deploysimple/driver"
 	"deploysimple/dto"
+	"time"
 )
 
-func AddNewUser(objUser dto.NewUser) (newID int64, err error) {
-	rsl, err := driver.GetConn().Exec("Insert into user (UserName, FullName, CreatedAt, CreatedUser, BirthDay, UpdatedAt, UpdatedUser) values (?,?,?,?,?,?,?)",
-		objUser.UserName, objUser.FullName, objUser.CreateAt, objUser.CreatedUser, objUser.BirthDay, objUser.UpdateAt, objUser.UpdatedUser)
+func AddNewUser(objUser dto.User) (newID int64, err error) {
+	createdat := time.Now()
+	rsl, err := driver.GetConn().Exec("INSERT INTO USER (UserName, FullName, CreatedUser, BirthDay, CreatedAt) VALUES (?,?,?,?,?)",
+		objUser.UserName, objUser.FullName, objUser.CreatedUser, objUser.BirthDay, createdat)
 	if err != nil {
 		return -1, err
 	}
