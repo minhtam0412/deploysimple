@@ -1,6 +1,6 @@
-package models
+package dto
 
 type Result struct {
-	err error `json:"error"`
-	data interface{} `json:"data"`
+	Data         interface{} `json:"result"`
+	ErrorMessage string      `json:"error-message"`
 }

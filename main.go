@@ -1,22 +1,18 @@
 package main
 
 import (
+	"deploysimple/driver"
 	_ "deploysimple/driver"
-	"github.com/gin-gonic/gin"
+	"deploysimple/routers"
 	"log"
 	"os"
 )
 
 func main() {
+	defer driver.GetConn()
 	port := GetPort()
 	log.Println("[-] Listening on...", port)
-	r := gin.Default()
-	r.GET("/ping", func(c *gin.Context) {
-		c.JSON(200, gin.H{
-			"message": "pong",
-		})
-	})
-	r.Run(port) // listen and serve on port
+	routers.Run(port)
 }
 
 func GetPort() string {

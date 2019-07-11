@@ -1,4 +1,4 @@
-package routeruser
+package routers
 
 import (
 	"deploysimple/controllers"
@@ -7,8 +7,16 @@ import (
 
 var router *gin.Engine
 
-func init()  {
+func init() {
 	router = gin.Default()
-	router.GET("/getlistuser", controllers.HandleGetListRequest)
+	router.GET("/getall", controllers.HandleGetAllUserRequest)
+	router.POST("/add", controllers.HandleAddUserRequest)
+	router.PUT("/update", controllers.HandleUpdateUserRequest)
+	router.DELETE("/delete", controllers.HandleDeleteUserRequest)
+	router.GET("/get/:id", controllers.HandleGetUserByKey)
+	router.GET("/ping", controllers.Ping)
 }
 
+func Run(port string) {
+	router.Run(port)
+}
